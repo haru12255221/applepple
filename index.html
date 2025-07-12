@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Tailwind Gallery Sample</title>
+    <style>
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .image-overlay {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover .image-overlay {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col text-[#333] font-sans">
+    <div
+        x-data="{ headerContent: '' }"
+        x-init="fetch('header.html').then(response => response.text()).then(html => headerContent = html).catch(error => console.error('Failed to load header:', error))"
+        x-html="headerContent"
+    ></div>
+    <main class="flex-1">
+        <section class="grid grid-cols-1 gap-x-6 justify-center text-center p-12 w-full sm:grid-cols-3">
+            <div class="shadow-lg p-6 bg-white rounded-md relative">
+                <img class="rounded-lg object-cover h-60 w-full" src="images/square1.jpg" alt="正方形の犬画像">
+                <div class="flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-3xl text-left font-bold line-clamp-2">Gallery 1: Cute Dog</h2>
+                        <p class="text-lg text-left line-clamp-2">This is a simple example of a Tailwind CDN theme using Tailwind CSS.</p>
+                    </div>
+                    <a href="" class="self-end">詳細へ→</a>
+                </div>
+            </div>
+            <div class="shadow-lg p-6 bg-white rounded-md">
+                <img class="rounded-lg object-cover h-60 w-full" src="images/tate1.jpg" alt="縦長の犬の画像">
+                <div class="flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-3xl text-left font-bold line-clamp-2">Gallery 2: Golden Retriever in the house</h2>
+                        <p class="text-lg text-left line-clamp-2">This is a simple example of a Tailwind CDN theme using Tailwind CSS.</p>
+                    </div>
+                    <a href="#" class="self-end">詳細へ→</a>
+                </div>
+            </div>
+            <div class="shadow-lg p-6 bg-white rounded-md relative">
+                <img class="rounded-lg object-cover h-60 w-full" src="images/yoko1.jpg" alt="横長の犬の画像">
+                <div class="flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-3xl text-left font-bold line-clamp-2">Gallery 3: Fluffy golden retriever Sitting on a Sofa at Home</h2>
+                        <p class="text-lg text-left line-clamp-2">This is a simple example of a Tailwind CDN theme using Tailwind CSS.</p>
+                    </div>
+                    <a href="#" class="self-end">詳細へ→</a>
+                </div>
+            </div>
+        </section>
+        <nav class="flex justify-center items-center p-4">
+            <ul class="flex items-center rounded-lg border">
+                <li class="border p-2">1</li>
+                <li class="border p-2">2</li>
+                <li class="border p-2">3</li>
+                <li class="border p-2">→</li>
+            </ul>
+        </nav>
+    </main>
+    <div
+        x-data="{ footerContent: ''}"
+        x-init="fetch('footer.html').then(response => response.text()).then(html => footerContent = html).catch(error => console.error('Failed to load footer:', error))"
+        x-html="footerContent"
+    ></div>
+
+</body>
+</html>

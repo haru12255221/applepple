@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>detailPage</title>
+    <style>
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .sidebar-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col text-[#333] font-sans">
+    <div
+        x-data="{ headerContent: '' }"
+        x-init="fetch('header.html').then(response => response.text()).then(html => headerContent = html).catch(error => console.error('Failed to load header:', error))"
+        x-html="headerContent"
+    ></div>
+
+    <!-- メインコンテンツ -->
+<main class="flex-1 grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 p-6 lg:p-12 max-w-7xl mx-auto">        <div class="prose max-w-4xl mx-auto p-6">
+            <!-- パンくずリスト -->
+            <nav class="">
+                <ol class="flex text-gray-600 text-sm list-none">
+                    <li>
+                        <a href="#" class="hover:underline">ホーム</a>
+                        <span class="text-gray-400">/</span>
+                    </li>
+                    <li><a href="#" class="hover:underline font-semibold">ドッグラン活用術！マナーと注意点を学ぼう</a></li>
+                </ol>
+            </nav>
+            <h1 class="text-4xl">ドッグラン活用術！マナーと注意点を学ぼう</h1>
+            <time datetime="2025-03-23">2025年3月23日</time>
+            <span>
+                <span class="text-xs font-semibold px-2.5 py-0.5">#お出かけスポット</span><span class="text-xs font-semibold px-2.5 py-0.5">#愛犬との暮らし</span><span class="text-xs font-semibold px-2.5 py-0.5">#トレーニング</span>
+            </span>
+            <img src="images/square1.jpg" onerror="this.src='https://placehold.co/600x400'" alt="正方形の犬画像" class="w-full object-cover rounded-md my-4">
+            <p>
+                ドッグランは、愛犬と一緒に楽しむことができる素晴らしい場所です。しかし、ドッグランを利用する際には、いくつかのマナーと注意点があります。まず、他の犬や飼い主とのトラブルを避けるために、愛犬の社会性をしっかりと育てておくことが大切です。また、ドッグラン内ではリードを外すことができますが、愛犬が他の犬に対して攻撃的な行動を示す場合は、すぐにリードをつけるようにしましょう。さらに、ドッグラン内では愛犬の排泄物をきちんと処理し、清潔な環境を保つことも重要です。最後に、ドッグランは愛犬同士のコミュニケーションの場でもあるため、他の飼い主との交流も楽しんでください。
+
+                ドッグランを訪れる前には、必ず施設ごとのルールや利用規約を確認しましょう。多くのドッグランでは、ワクチン接種やノミ・ダニ予防が義務付けられている場合があります。また、発情期の犬や病気の犬は利用を控えることが求められています。これらのルールを守ることで、すべての利用者が安心して過ごせる環境が保たれます。
+
+                ドッグランでは、愛犬の様子を常に観察し、他の犬や人とのトラブルが起きないように注意しましょう。特に初めて利用する場合や、他の犬に慣れていない場合は、最初はリードをつけたまま様子を見るのもおすすめです。愛犬が興奮しすぎたり、他の犬にしつこく絡んだりする場合は、すぐに声をかけて落ち着かせましょう。
+
+                また、ドッグランは飼い主同士の情報交換や交流の場としても活用できます。他の飼い主と挨拶を交わしたり、犬のしつけや健康について相談したりすることで、新たな発見や学びが得られることもあります。マナーを守りながら、愛犬と一緒に楽しい時間を過ごしてください。
+
+                最後に、ドッグランを利用した後は、愛犬の体調やケガの有無をしっかり確認しましょう。特に足裏や耳、被毛に異常がないかチェックし、必要に応じてケアを行うことが大切です。ドッグランでの経験を通じて、愛犬との絆をさらに深めていきましょう。
+            </p>
+            <section>
+                <div x-data="{ showSubmitButton: false ,nameValue: '', commentValue: ''}" class="space-y-4">
+                    <form class="space-y-4 border-t py-4">
+                        <div>
+                            <input 
+                                x-model="nameValue"
+                                @focusin="showSubmitButton = true"
+                                @blur="if (!nameValue && !commentValue) showSubmitButton = false"
+                                type="text" placeholder="名前" id="name" name="name" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ec652b]">
+                        </div>
+                        <div>
+                            <textarea 
+                                x-model="commentValue"
+                                @focusin="showSubmitButton = true"
+                                @blur="if (!nameValue && !commentValue) showSubmitButton = false"
+                                placeholder="コメントを投稿"
+                                id="comment" name="comment" rows="4" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ec652b]">
+                            </textarea>
+                        </div>
+                        <div class="flex justify-end">
+                            <button type="submit" 
+                                x-show="showSubmitButton || nameValue.length > 0 || commentValue.length > 0"
+                                class="px-4 py-2 text-white bg-[#ec652b] rounded-md hover:bg-[#d95a2c] focus:outline-none focus:ring-2 focus:ring-[#ec652b] transition-colors duration-200">
+                                投稿する
+                        </button>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <h2 class="border-b pb-2">コメント</h2>
+                    <div class="text-sm">
+                        <div class="flex items-center space-x-2">
+                            <div>
+                                <img src="images/Squirrel Icon from icooon-mono.jpeg" alt="リスのアイコン" class="w-10 h-10 rounded-full">
+                            </div>
+                            <div flex="flex flex-col">
+                                <p class="text-gray-600 font-semibold">リスさん</p>
+                                <time datetime="2025-03-23" class="text-xs text-gray-500">2025年3月23日</time>
+                            </div>
+                        </div>
+                        <p class="text-gray-800">ドッグランは本当に楽しい場所ですね！愛犬も大喜びでした。</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div>
+            <div class="p-4 bg-white shadow-lg rounded-md">
+                <h2 class="text-2xl font-bold mb-4 border-b pb-2">関連リンク</h2>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">ドッグランの利用規約</a></li>
+                    <li><a href="#" class="hover:underline">愛犬の健康管理ガイド</a></li>
+                    <li><a href="#" class="hover:underline">愛犬とのお出かけスポット一覧</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl py-4 font-bold border-b pb-2">最新記事</h3>
+                <ul class="space-y-4">
+                    <li class="p-4 bg-white shadow-lg rounded-md flex border border-gray-200">
+                        <img src="images/tate1.jpg" alt="" class="w-24 h-24 object-cover rounded-md mr-4">
+                        <div>
+                            <h4 class="text-xl font-bold line-clamp-2">愛犬とのお出かけスポット</h4>
+                            <p>2025年3月20日</p>
+                        </div>
+                    </li>
+                    <li class="p-4 bg-white shadow-lg rounded-md flex">
+                        <img src="images/square2.jpg" alt="" class="w-24 h-24 object-cover rounded-md mr-4">
+                        <div>
+                            <h4 class="text-xl font-bold line-clamp-2">愛犬とのお出かけスポット</h4>
+                            <p>2025年3月20日</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl py-4 font-bold">カテゴリー</h3>
+                <ul class="space-y-2">
+                    <li class="border-b pb-2"><a href="#" class="hover:underline">お出かけスポット</a></li>
+                    <li class="border-b pb-2"><a href="#" class="hover:underline">愛犬との暮らし</a></li>
+                    <li class="border-b pb-2"><a href="#" class="hover:underline">トレーニング</a></li>
+                </ul>
+            </div>
+        </div>
+        <nav class="flex justify-center items-center py-2">
+            <ul class="flex items-center rounded-lg border">
+                <li class="border p-2">1</li>
+                <li class="border p-2">2</li>
+                <li class="border p-2">3</li>
+                <li class="border p-2">→</li>
+            </ul>
+        </nav>
+    </main>
+    <div
+        x-data="{ footerContent: ''}"
+        x-init="fetch('footer.html').then(response => response.text()).then(html => footerContent = html).catch(error => console.error('Failed to load footer:', error))"
+        x-html="footerContent"
+    ></div>
+</body>
+</html>
