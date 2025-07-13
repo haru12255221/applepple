@@ -6,6 +6,7 @@
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.html">
     <title>Tailwind Gallery Sample</title>
     <style>
         .card-hover {
@@ -22,8 +23,56 @@
             transform: scale(1.05);
         }
     </style>
+    <script>
+        function themeSwitch() {
+            return {
+                darkMode: false,
+            
+                init() {
+                    const saved = localStorage.getItem('theme');
+                    if (saved) {
+                        this.darkMode = saved == 'dark';
+                    } else {
+                        this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    }
+                    this.applyClass();
+                },
+                toggle() {
+                    this.darkMode = !this.darkMode;
+                    localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
+                    this.applyClass();
+                },
+                applyClass() {
+                    if (this.darkMode) {
+                        document.documentElement.classList.add('dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+    tailwind.config = {
+        darkMode: 'class', 
+    }
+    </script>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col text-[#333] font-sans">
+<body 
+    x-data="themeSwitch()"
+    x-init="init()"
+    class="bg-white dark:bg-gray-900 min-h-screen flex flex-col text-gray-900 dark:text-gray-100 font-sans">
+    <div
+        x-data="{ styleContent: '' }"
+        x-init="fetch('style.html').then(response => response.text()).then(html => { document.head.insertAdjacentHTML('beforeend', html) })"
+    >        
+    </div>
+    <button
+        @click="toggle"
+        class="dark:bg-gray-700"
+        >切り替え
+            <span x-text="darkMode ? 'ライトモードに切り替え' : 'ダークモードに切り替え'"></span>
+    </button>
     <div
         x-data="{ headerContent: '' }"
         x-init="fetch('header.html').then(response => response.text()).then(html => headerContent = html).catch(error => console.error('Failed to load header:', error))"
@@ -31,43 +80,43 @@
     ></div>
     <main class="flex-1">
         <section class="grid grid-cols-1 gap-x-6 justify-center text-center p-12 w-full sm:grid-cols-3">
-            <div class="shadow-lg p-6 bg-white rounded-md relative">
+            <div class="shadow-lg p-6 bg-white dark:bg-gray-800 rounded-md relative">
                 <img class="rounded-lg object-cover h-60 w-full" src="images/square1.jpg" alt="正方形の犬画像">
                 <div class="flex flex-col justify-between">
                     <div>
                         <h2 class="text-3xl text-left font-bold line-clamp-2">Gallery 1: Cute Dog</h2>
-                        <p class="text-lg text-left line-clamp-2">This is a simple example of a Tailwind CDN theme using Tailwind CSS.</p>
+                        <p class="text-lg text-left line-clamp-2 text-gray-600 dark:text-gray-400">This is a simple example of a Tailwind CDN theme using Tailwind CSS.</p>
                     </div>
-                    <a href="" class="self-end">詳細へ→</a>
+                    <a href="entry.html" class="self-end text-[#333] dark:text-gray-100 underline">詳細へ→</a>
                 </div>
             </div>
-            <div class="shadow-lg p-6 bg-white rounded-md">
+            <div class="shadow-lg p-6 bg-white dark:bg-gray-800 rounded-md">
                 <img class="rounded-lg object-cover h-60 w-full" src="images/tate1.jpg" alt="縦長の犬の画像">
                 <div class="flex flex-col justify-between">
                     <div>
                         <h2 class="text-3xl text-left font-bold line-clamp-2">Gallery 2: Golden Retriever in the house</h2>
-                        <p class="text-lg text-left line-clamp-2">This is a simple example of a Tailwind CDN theme using Tailwind CSS.</p>
+                        <p class="text-lg text-left line-clamp-2 text-gray-600 dark:text-gray-400">This is a simple example of a Tailwind CDN theme using Tailwind CSS.</p>
                     </div>
-                    <a href="#" class="self-end">詳細へ→</a>
+                    <a href="#" class="self-end text-[#333] dark:text-gray-100 underline">詳細へ→</a>
                 </div>
             </div>
-            <div class="shadow-lg p-6 bg-white rounded-md relative">
+            <div class="shadow-lg p-6 bg-white dark:bg-gray-800 rounded-md relative">
                 <img class="rounded-lg object-cover h-60 w-full" src="images/yoko1.jpg" alt="横長の犬の画像">
                 <div class="flex flex-col justify-between">
                     <div>
                         <h2 class="text-3xl text-left font-bold line-clamp-2">Gallery 3: Fluffy golden retriever Sitting on a Sofa at Home</h2>
-                        <p class="text-lg text-left line-clamp-2">This is a simple example of a Tailwind CDN theme using Tailwind CSS.</p>
+                        <p class="text-lg text-left line-clamp-2 text-gray-600 dark:text-gray-400">This is a simple example of a Tailwind CDN theme using Tailwind CSS.</p>
                     </div>
-                    <a href="#" class="self-end">詳細へ→</a>
+                    <a href="#" class="self-end text-[#333] dark:text-gray-100 underline">詳細へ→</a>
                 </div>
             </div>
         </section>
         <nav class="flex justify-center items-center p-4">
-            <ul class="flex items-center rounded-lg border">
-                <li class="border p-2">1</li>
-                <li class="border p-2">2</li>
-                <li class="border p-2">3</li>
-                <li class="border p-2">→</li>
+            <ul class="flex items-center rounded-lg border border-gray-200 dark:border-gray-700">
+                <li class="border border-gray-200 dark:border-gray-700 p-2">1</li>
+                <li class="border border-gray-200 dark:border-gray-700 p-2">2</li>
+                <li class="border border-gray-200 dark:border-gray-700 p-2">3</li>
+                <li class="border border-gray-200 dark:border-gray-700 p-2">→</li>
             </ul>
         </nav>
     </main>
@@ -76,6 +125,5 @@
         x-init="fetch('footer.html').then(response => response.text()).then(html => footerContent = html).catch(error => console.error('Failed to load footer:', error))"
         x-html="footerContent"
     ></div>
-
 </body>
 </html>

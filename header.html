@@ -1,26 +1,30 @@
-<header x-data="{ open: false }" class="bg-white shadow-lg">
+<header x-data="{ open: false }" class="bg-white dark:bg-gray-900 shadow-lg text-gray-900 dark:text-gray-100">
     <div class="max-w-7xl mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
             <!-- ロゴエリア -->
             <div class="flex items-center">
-                <h1 class="text-2xl font-bold text-gray-900">Tailwind CDN</h1>
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    <a href="index.html">
+                        Tailwind CDN
+                    </a>
+                </h1>
             </div>
 
             <!-- デスクトップナビゲーション -->
             <nav class="hidden lg:flex items-center space-x-8">
                 <div class="relative">
                     <input type="text" placeholder="キーワードを入力" 
-                           class="w-64 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ec652b] focus:border-transparent text-sm">
+                        class="w-64 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ec652b] focus:border-transparent text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
                 </div>
-                <a href="index.html" class="text-gray-700 hover:text-[#ec652b] transition-colors font-medium">Home</a>
-                <a href="#" class="text-gray-700 hover:text-[#ec652b] transition-colors font-medium">Summary</a>
-                <a href="#" class="text-gray-700 hover:text-[#ec652b] transition-colors font-medium">Calendar</a>
+                <a href="index.html" class="text-gray-700 dark:text-gray-100 hover:text-[#ec652b] transition-colors font-medium">Home</a>
+                <a href="#" class="text-gray-700 dark:text-gray-100 hover:text-[#ec652b] transition-colors font-medium">Summary</a>
+                <a href="#" class="text-gray-700 dark:text-gray-100 hover:text-[#ec652b] transition-colors font-medium">Calendar</a>
                 <a href="#" class="bg-[#ec652b] text-white px-6 py-2 rounded-lg hover:bg-[#d95a2c] transition-colors font-medium">Contact</a>
             </nav>
 
             <!-- モバイルメニューボタン -->
-            <div class="lg:hidden">
-                <button @click="open = !open" class="text-gray-700 hover:text-[#ec652b] focus:outline-none">
+            <div class="lg:hidden flex items-center">
+                <button @click="open = !open" class="text-gray-700 dark:text-gray-100 hover:text-[#ec652b] focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -31,23 +35,24 @@
 
         <!-- モバイルメニュー -->
         <div x-show="open" @click.outside="open = false" 
-             x-transition:enter="transition ease-out duration-200"
-             x-transition:enter-start="opacity-0 transform -translate-y-2"
-             x-transition:enter-end="opacity-100 transform translate-y-0"
-             x-transition:leave="transition ease-in duration-150"
-             x-transition:leave-start="opacity-100 transform translate-y-0"
-             x-transition:leave-end="opacity-0 transform -translate-y-2"
-             class="lg:hidden mt-4 pt-4 border-t border-gray-200">
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 transform -translate-y-2"
+            x-transition:enter-end="opacity-100 transform translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 transform translate-y-0"
+            x-transition:leave-end="opacity-0 transform -translate-y-2"
+            class="lg:hidden mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
             <div class="space-y-4">
                 <div>
                     <input type="text" placeholder="キーワードを入力" 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ec652b] focus:border-transparent text-sm">
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ec652b] focus:border-transparent text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
                 </div>
-                <a href="index.html" class="block text-gray-700 hover:text-[#ec652b] transition-colors font-medium py-2">Home</a>
-                <a href="#" class="block text-gray-700 hover:text-[#ec652b] transition-colors font-medium py-2">Summary</a>
-                <a href="#" class="block text-gray-700 hover:text-[#ec652b] transition-colors font-medium py-2">Calendar</a>
+                <a href="index.html" class="block text-gray-700 dark:text-gray-100 hover:text-[#ec652b] transition-colors font-medium py-2">Home</a>
+                <a href="#" class="block text-gray-700 dark:text-gray-100 hover:text-[#ec652b] transition-colors font-medium py-2">Summary</a>
+                <a href="#" class="block text-gray-700 dark:text-gray-100 hover:text-[#ec652b] transition-colors font-medium py-2">Calendar</a>
                 <a href="#" class="block bg-[#ec652b] text-white px-6 py-2 rounded-lg hover:bg-[#d95a2c] transition-colors font-medium text-center">Contact</a>
             </div>
         </div>
+
     </div>
 </header>

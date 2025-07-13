@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.html">
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,6 +22,40 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
     </style>
+    <script>
+        function themeSwitch() {
+            return {
+                darkMode: false,
+            
+                init() {
+                    const saved = localStorage.getItem('theme');
+                    if (saved) {
+                        this.darkMode = saved == 'dark';
+                    } else {
+                        this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    }
+                    this.applyClass();
+                },
+                toggle() {
+                    this.darkMode = !this.darkMode;
+                    localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
+                    this.applyClass();
+                },
+                applyClass() {
+                    if (this.darkMode) {
+                        document.documentElement.classList.add('dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+    tailwind.config = {
+        darkMode: 'class', 
+    }
+    </script>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col text-[#333] font-sans">
     <div
@@ -28,7 +63,6 @@
         x-init="fetch('header.html').then(response => response.text()).then(html => headerContent = html).catch(error => console.error('Failed to load header:', error))"
         x-html="headerContent"
     ></div>
-
     <!-- メインコンテンツ -->
 <main class="flex-1 grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 p-6 lg:p-12 max-w-7xl mx-auto">        <div class="prose max-w-4xl mx-auto p-6">
             <!-- パンくずリスト -->
@@ -80,7 +114,7 @@
                         <div class="flex justify-end">
                             <button type="submit" 
                                 x-show="showSubmitButton || nameValue.length > 0 || commentValue.length > 0"
-                                class="px-4 py-2 text-white bg-[#ec652b] rounded-md hover:bg-[#d95a2c] focus:outline-none focus:ring-2 focus:ring-[#ec652b] transition-colors duration-200">
+                                class="px-4 py-2 text-white bg-primary rounded-md hover:bg-[#d95a2c] focus:outline-none focus:ring-2 focus:ring-[#ec652b] transition-colors duration-200">
                                 投稿する
                         </button>
                         </div>
